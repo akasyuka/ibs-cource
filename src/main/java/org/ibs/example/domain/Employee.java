@@ -1,11 +1,9 @@
-package org.ibs.example;
+package org.ibs.example.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.ibs.example.domain.Course;
-import org.ibs.example.domain.Department;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,7 +18,7 @@ import java.util.List;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
     @Lob
@@ -35,20 +33,20 @@ public class Employee {
     private LocalDate birthday;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
     @Column(name = "month_salary")
     private Integer monthSalary;
 
-    @Column(name = "boss_id")
-    private Integer bossId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "boss_id")
+    private Employee boss;
 
     @ManyToMany
     @JoinTable(name = "employee_course",
-                joinColumns = @JoinColumn(name="employee_id"),
-                inverseJoinColumns = @JoinColumn(name="course_id"))
+            joinColumns = @JoinColumn(name="employee_id"),
+            inverseJoinColumns = @JoinColumn(name="course_id"))
     private List<Course> courses;
-
 
 }
