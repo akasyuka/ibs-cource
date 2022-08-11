@@ -7,6 +7,7 @@ import org.ibs.example.domain.Employee;
 import org.ibs.example.repository.EmployeeRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 @Configuration
 @Slf4j
@@ -16,7 +17,14 @@ public class GreetingServiceConfig {
 // этот класс является бином, который имплементирует интерфейс GreetingService
 // Мы сами написали бин
     @Bean
+    @Profile("!test")
     GreetingService getGrSerImpl() {
+        return new GreetingServiceImpl(log);
+    }
+
+    @Bean
+    @Profile("test")
+    GreetingService getGrSerImpl2() {
         return new GreetingServiceImpl(log);
     }
 
