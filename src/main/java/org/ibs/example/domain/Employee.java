@@ -1,9 +1,6 @@
 package org.ibs.example.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@ToString
 @Table(name = "employee")
 public class Employee {
     @Id
@@ -21,11 +19,9 @@ public class Employee {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Lob
     @Column(name = "first_name")
     private String firstName;
 
-    @Lob
     @Column(name = "last_name")
     private String lastName;
 
@@ -45,8 +41,8 @@ public class Employee {
 
     @ManyToMany
     @JoinTable(name = "employee_course",
-            joinColumns = @JoinColumn(name="employee_id"),
-            inverseJoinColumns = @JoinColumn(name="course_id"))
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> courses;
 
 }
