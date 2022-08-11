@@ -15,6 +15,27 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    //////Практическое задание
+    ////получить список непосредственных подчиненных сотрудника
+    //находим сотрудника по id, узнаем boss_id
+    //находим всех сотрудников у кого boss_id такой же
+    @GetMapping("/subordinates/{id}")
+    Iterable<Employee> getSubordinates(@PathVariable Integer id) {
+        Integer bossId = employeeRepository.findById(id).get().getBoss().getId();
+        if (bossId == null) {
+            return null;
+        } else {
+            return employeeRepository.findAllByBoss(bossId);
+        }
+    }
+    ////получить непосредственного руководителя сотрудника
+    //находим по boss_id равному id сотрудника
+
+    ////список сотрудников получающих больший месячный оклад, чем их руководители (зарплатный сервис)
+    //если зарплата выше чем зарплата (находим по boss_id равному id сотрудника) значит сохраняем в список
+
+    //////
+
     @GetMapping
     Iterable<Employee> getAll(@RequestParam(required = false) String firstName) {
         if (firstName == null) {
