@@ -33,17 +33,17 @@ class DbTest {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @BeforeEach
-    void setup() {
-        Department department = new Department(null, "IT");
-        Course course = new Course(null,"REST service");
-        Employee employee = new Employee(null, "а", "б", LocalDate.now(),
-                                            department, 500,null, List.of(course));
-
-        em.persist(department);
-        em.persist(course);
-        em.persist(employee);
-    }
+//    @BeforeEach
+//    void setup() {
+//        Department department = new Department(null, "IT");
+//        Course course = new Course(null,"REST service");
+//        Employee employee = new Employee(null, "а", "б", LocalDate.now(),
+//                                            department, 500,null, List.of(course));
+//
+//        em.persist(department);
+//        em.persist(course);
+//        em.persist(employee);
+//    }
 
 //    @Test
 //    void test() {

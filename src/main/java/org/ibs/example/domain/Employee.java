@@ -30,7 +30,7 @@ public class Employee {
     private LocalDate birthday;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
@@ -42,7 +42,7 @@ public class Employee {
     @JoinColumn(name = "boss_id")
     private Employee boss;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "employee_course",
             joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
