@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @RestController("emp v2")
 @RequestMapping("/v2/employees")
@@ -19,21 +22,38 @@ public class EmployeeController {
     ////получить список непосредственных подчиненных сотрудника
     //находим сотрудника по id, узнаем boss_id
     //находим всех сотрудников у кого boss_id такой же
-    @GetMapping("/subordinates/{id}")
-    Iterable<Employee> getSubordinates(@PathVariable Integer id) {
-        Integer bossId = employeeRepository.findById(id).get().getBoss().getId();
-        if (bossId == null) {
-            return null;
-        } else {
-            return employeeRepository.findAllByBoss(bossId);
-        }
-    }
+    //16
+//    @GetMapping("/subordinates/{id}")
+//    Iterable<Employee> getSubordinates(@PathVariable Integer id) {
+//        Integer bossId = employeeRepository.findById(id).get().getBoss().getId();
+////        if (bossId == null) {
+////            return null;
+////        } else {
+//            return employeeRepository.findAll().forEach(employee ->
+//                    if (e));
+////        }
+//    }
     ////получить непосредственного руководителя сотрудника
     //находим по boss_id равному id сотрудника
-
+    //17 work!
+    @GetMapping("/supervisor/{id}")
+    Employee getBoss(@PathVariable Integer id) {
+            return employeeRepository.findById(employeeRepository.findById(id).get().getBoss().getId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
     ////список сотрудников получающих больший месячный оклад, чем их руководители (зарплатный сервис)
     //если зарплата выше чем зарплата (находим по boss_id равному id сотрудника) значит сохраняем в список
-
+    @GetMapping("/bigsalary")
+    Iterable<Employee> getSubordinatesMaxSalary() {
+        List<Employee> list = new ArrayList<>();
+        for (Employee employee : employeeRepository.findAll()) {
+            if (employee.getMonthSalary() > employee.getBoss().getMonthSalary()) {
+                list.add(employee);
+            }
+            list.add(employee);
+        }
+        return list;
+    }
     //////
 
     @GetMapping

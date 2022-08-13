@@ -17,7 +17,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        String indexUl = "http://localhost:8080/api/swagger-ui/index.html?urls.primaryName=v2";
+        String indexUl = "https://localhost:8443/api/swagger-ui/index.html?urls.primaryName=v2";
         http
                 .csrf().disable()
                 .authorizeRequests()
