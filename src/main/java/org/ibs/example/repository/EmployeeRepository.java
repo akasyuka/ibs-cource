@@ -14,7 +14,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
     List<Employee> findAllByFirstName(String firstName);
 
     //получить список непосредственных подчиненных сотрудника
-    List<Employee> findAllByBoss(Integer boss);
+    List<Employee> findAllByBossId(Integer boss);
     //получить непосредственного руководителя сотрудника
     //список сотрудников получающих больший месячный оклад, чем их руководители (зарплатный сервис)
 

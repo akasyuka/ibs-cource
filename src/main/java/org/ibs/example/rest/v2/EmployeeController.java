@@ -20,37 +20,33 @@ public class EmployeeController {
 
     //////Практическое задание
     ////получить список непосредственных подчиненных сотрудника
-    //находим сотрудника по id, узнаем boss_id
-    //находим всех сотрудников у кого boss_id такой же
     //16
-//    @GetMapping("/subordinates/{id}")
-//    Iterable<Employee> getSubordinates(@PathVariable Integer id) {
-//        Integer bossId = employeeRepository.findById(id).get().getBoss().getId();
-////        if (bossId == null) {
-////            return null;
-////        } else {
-//            return employeeRepository.findAll().forEach(employee ->
-//                    if (e));
-////        }
-//    }
+    @GetMapping("/subordinates/{id}")
+    Iterable<Employee> getSubordinates(@PathVariable Integer id) {
+        return employeeRepository.findAllByBossId(id);
+    }
+
     ////получить непосредственного руководителя сотрудника
-    //находим по boss_id равному id сотрудника
     //17 work!
     @GetMapping("/supervisor/{id}")
     Employee getBoss(@PathVariable Integer id) {
-            return employeeRepository.findById(employeeRepository.findById(id).get().getBoss().getId())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return employeeRepository.findById(employeeRepository.findById(id).get().getBoss().getId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
+
     ////список сотрудников получающих больший месячный оклад, чем их руководители (зарплатный сервис)
-    //если зарплата выше чем зарплата (находим по boss_id равному id сотрудника) значит сохраняем в список
     @GetMapping("/bigsalary")
     Iterable<Employee> getSubordinatesMaxSalary() {
         List<Employee> list = new ArrayList<>();
         for (Employee employee : employeeRepository.findAll()) {
-            if (employee.getMonthSalary() > employee.getBoss().getMonthSalary()) {
-                list.add(employee);
+            try {
+                if ((employee.getMonthSalary() > employeeRepository.findById(employee.getBoss().getId()).get().getMonthSalary())
+                        && (employeeRepository.findById(employee.getBoss().getId()).get() != null)) {
+                    list.add(employee);
+                }
+            } catch (NullPointerException exception) {
+                System.out.println(exception);
             }
-            list.add(employee);
         }
         return list;
     }
@@ -61,7 +57,7 @@ public class EmployeeController {
         if (firstName == null) {
             return employeeRepository.findAll();
         } else
-        return employeeRepository.findAllByFirstName(firstName);
+            return employeeRepository.findAllByFirstName(firstName);
     }
 
     @PostMapping
