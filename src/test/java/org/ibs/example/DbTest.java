@@ -33,26 +33,25 @@ class DbTest {
     @Autowired
     EmployeeRepository employeeRepository;
 
-//    @BeforeEach
-//    void setup() {
-//        Department department = new Department(null, "IT");
-//        Course course = new Course(null,"REST service");
-//        Employee employee = new Employee(null, "а", "б", LocalDate.now(),
-//                                            department, 500,null, List.of(course));
-//
-//        em.persist(department);
-//        em.persist(course);
-//        em.persist(employee);
-//    }
+    @BeforeEach
+    void setup() {
+        Department department = new Department(null, "IT", null);
+        Course course = new Course(null,"REST service");
+        Employee employee = new Employee(null, "а", "б", LocalDate.now(),
+                                            department, 500,null, List.of(course));
+        em.persist(department);
+        em.persist(course);
+        em.persist(employee);
+    }
 
-//    @Test
-//    void test() {
-//        Assert.assertEquals(1, em.createQuery("From Department").getResultList().size());
-//        Employee employee = em.createQuery("From Employee",Employee.class).setMaxResults(1).
-//                                                                                  getResultList().
-//                                                                                  get(0);
-//        Assert.assertEquals("REST service", employee.getCourses().get(0).getName());
-//    }
+    @Test
+    void test() {
+        Assert.assertEquals(1, em.createQuery("From Department").getResultList().size());
+        Employee employee = em.createQuery("From Employee",Employee.class).setMaxResults(1).
+                                                                                  getResultList().
+                                                                                  get(0);
+        Assert.assertEquals("REST service", employee.getCourses().get(0).getName());
+    }
 
     @Test
     void test2() {
