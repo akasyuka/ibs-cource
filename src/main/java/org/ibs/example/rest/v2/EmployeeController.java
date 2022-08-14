@@ -18,23 +18,21 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    //////Практическое задание
-    ////получить список непосредственных подчиненных сотрудника
-    //16
+    ////Практическое задание
+    //получить список непосредственных подчиненных сотрудника
     @GetMapping("/subordinates/{id}")
     Iterable<Employee> getSubordinates(@PathVariable Integer id) {
         return employeeRepository.findAllByBossId(id);
     }
 
-    ////получить непосредственного руководителя сотрудника
-    //17 work!
+    //получить непосредственного руководителя сотрудника
     @GetMapping("/supervisor/{id}")
     Employee getBoss(@PathVariable Integer id) {
         return employeeRepository.findById(employeeRepository.findById(id).get().getBoss().getId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    ////список сотрудников получающих больший месячный оклад, чем их руководители (зарплатный сервис)
+    //список сотрудников получающих больший месячный оклад, чем их руководители (зарплатный сервис)
     @GetMapping("/bigsalary")
     Iterable<Employee> getSubordinatesMaxSalary() {
         List<Employee> list = new ArrayList<>();
@@ -50,7 +48,6 @@ public class EmployeeController {
         }
         return list;
     }
-    //////
 
     @GetMapping
     Iterable<Employee> getAll(@RequestParam(required = false) String firstName) {
