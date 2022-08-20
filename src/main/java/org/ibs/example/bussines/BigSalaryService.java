@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BigSalaryService {
@@ -17,15 +18,8 @@ public class BigSalaryService {
     public Iterable<Employee> getBigSalary() {
         List<Employee> list = new ArrayList<>();
         for (Employee employee : employeeRepository.findAll()) {
-            try {
-                if ((employee.getMonthSalary() > employeeRepository.findById(employee.getBoss().getId()).get().getMonthSalary())
-                        && (employeeRepository.findById(employee.getBoss().getId()).get() != null)) {
-                    list.add(employee);
-                }
-            } catch (NullPointerException exception) {
-                System.out.println(exception);
-            }
+            list.add(employee);
         }
-        return list;
+        return list.stream().filter(i -> i.getBoss() != null && (i.getMonthSalary() > i.getBoss().getMonthSalary())).collect(Collectors.toList());
     }
 }

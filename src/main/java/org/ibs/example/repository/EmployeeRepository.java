@@ -11,6 +11,9 @@ import java.util.Optional;
 public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
 
     Optional<Employee> findByFirstName(String firstName);
+
+    Optional<Employee> findByBoss(int boss);
+
     List<Employee> findAllByFirstName(String firstName);
 
     //получить список непосредственных подчиненных сотрудника
