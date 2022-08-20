@@ -1,5 +1,6 @@
 package org.ibs.example.rest.v2;
 
+import org.ibs.example.bussines.BigSalaryService;
 import org.ibs.example.domain.Employee;
 import org.ibs.example.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,35 +19,26 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private BigSalaryService bigsalaryService;
+
     ////Практическое задание
     //получить список непосредственных подчиненных сотрудника
-    @GetMapping("/subordinates/{id}")
+    @GetMapping("/{id}/subordinates")
     Iterable<Employee> getSubordinates(@PathVariable Integer id) {
         return employeeRepository.findAllByBossId(id);
     }
 
     //получить непосредственного руководителя сотрудника
-    @GetMapping("/supervisor/{id}")
+    @GetMapping("/{id}/supervisor")
     Employee getBoss(@PathVariable Integer id) {
-        return employeeRepository.findById(employeeRepository.findById(id).get().getBoss().getId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return employeeRepository.findById(id).get().getBoss();
     }
 
     //список сотрудников получающих больший месячный оклад, чем их руководители (зарплатный сервис)
     @GetMapping("/bigsalary")
     Iterable<Employee> getSubordinatesMaxSalary() {
-        List<Employee> list = new ArrayList<>();
-        for (Employee employee : employeeRepository.findAll()) {
-            try {
-                if ((employee.getMonthSalary() > employeeRepository.findById(employee.getBoss().getId()).get().getMonthSalary())
-                        && (employeeRepository.findById(employee.getBoss().getId()).get() != null)) {
-                    list.add(employee);
-                }
-            } catch (NullPointerException exception) {
-                System.out.println(exception);
-            }
-        }
-        return list;
+        return bigsalaryService.getBigSalary();
     }
 
     @GetMapping
