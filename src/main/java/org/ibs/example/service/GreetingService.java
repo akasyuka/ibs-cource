@@ -1,6 +1,6 @@
-package org.ibs.example.bussines;
+package org.ibs.example.service;
 
-import org.ibs.example.domain.Employee;
+import org.ibs.example.entity.Employee;
 
 public interface GreetingService {
     void sayHello(Employee employee);

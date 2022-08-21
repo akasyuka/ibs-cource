@@ -1,4 +1,4 @@
-package org.ibs.example.dto;
+package org.ibs.example.entity.dto;
 
 import lombok.Data;
 

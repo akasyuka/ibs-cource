@@ -1,8 +1,8 @@
-package org.ibs.example.bussines;
+package org.ibs.example.service;
 
-import org.ibs.example.domain.Department;
-import org.ibs.example.domain.Employee;
-import org.ibs.example.dto.mapper.EmployeeMapper;
+import org.ibs.example.entity.Department;
+import org.ibs.example.entity.Employee;
+import org.ibs.example.entity.dto.mapper.EmployeeMapper;
 import org.ibs.example.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class SalaryService {
     @Autowired
     private EmployeeMapper employeeMapper;
 
-    public Optional<org.ibs.example.dto.Employee> maxSalaryEmployeeInDepartment(Integer departmentId) {
+    public Optional<org.ibs.example.entity.dto.Employee> maxSalaryEmployeeInDepartment(Integer departmentId) {
         Optional<Department> departmentOptional = departmentRepository.findById(departmentId);
         if (departmentOptional.isEmpty() || departmentOptional.get().getEmployees().isEmpty()) {
             return Optional.empty();

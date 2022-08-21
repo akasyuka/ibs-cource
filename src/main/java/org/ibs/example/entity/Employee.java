@@ -1,4 +1,4 @@
-package org.ibs.example.domain;
+package org.ibs.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

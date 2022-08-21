@@ -1,8 +1,8 @@
 package org.ibs.example;
 
-import org.ibs.example.domain.Course;
-import org.ibs.example.domain.Department;
-import org.ibs.example.domain.Employee;
+import org.ibs.example.entity.Course;
+import org.ibs.example.entity.Department;
+import org.ibs.example.entity.Employee;
 import org.ibs.example.repository.EmployeeRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;

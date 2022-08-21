@@ -12,7 +12,7 @@ public class SpringDocConfig {
         return GroupedOpenApi.builder()
                 .group("v1")
                 .pathsToMatch("/v1/**")
-                .packagesToScan("org.ibs.example.rest.v1")
+                .packagesToScan("org.ibs.example.controller.v1")
                 .build();
     }
 
@@ -21,7 +21,7 @@ public class SpringDocConfig {
         return GroupedOpenApi.builder()
                 .group("v2")
                 .pathsToMatch("/v2/**")
-                .packagesToScan("org.ibs.example.rest.v2")
+                .packagesToScan("org.ibs.example.controller.v2")
                 .build();
     }
 }

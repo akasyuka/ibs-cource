@@ -1,7 +1,7 @@
-package org.ibs.example.rest.v2;
+package org.ibs.example.controller.v2;
 
-import org.ibs.example.bussines.SalaryService;
-import org.ibs.example.dto.Employee;
+import org.ibs.example.service.SalaryService;
+import org.ibs.example.entity.dto.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

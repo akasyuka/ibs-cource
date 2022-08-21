@@ -1,6 +1,6 @@
-package org.ibs.example.bussines;
+package org.ibs.example.service;
 
-import org.ibs.example.domain.Employee;
+import org.ibs.example.entity.Employee;
 import org.ibs.example.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

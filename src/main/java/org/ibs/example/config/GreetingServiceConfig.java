@@ -1,10 +1,9 @@
 package org.ibs.example.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.ibs.example.bussines.GreetingService;
-import org.ibs.example.bussines.GreetingServiceImpl;
-import org.ibs.example.domain.Employee;
-import org.ibs.example.repository.EmployeeRepository;
+import org.ibs.example.service.GreetingService;
+import org.ibs.example.service.GreetingServiceImpl;
+import org.ibs.example.entity.Employee;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

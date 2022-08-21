@@ -1,6 +1,6 @@
-package org.ibs.example.rest.v1;
+package org.ibs.example.controller.v1;
 
-import org.ibs.example.domain.Employee;
+import org.ibs.example.entity.Employee;
 import org.ibs.example.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

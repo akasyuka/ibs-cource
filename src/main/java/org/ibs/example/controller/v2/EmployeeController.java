@@ -1,15 +1,12 @@
-package org.ibs.example.rest.v2;
+package org.ibs.example.controller.v2;
 
-import org.ibs.example.bussines.BigSalaryService;
-import org.ibs.example.domain.Employee;
+import org.ibs.example.service.BigSalaryService;
+import org.ibs.example.entity.Employee;
 import org.ibs.example.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @RestController("emp v2")
