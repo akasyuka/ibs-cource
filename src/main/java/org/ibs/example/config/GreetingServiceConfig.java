@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.ibs.example.service.GreetingService;
 import org.ibs.example.service.GreetingServiceImpl;
 import org.ibs.example.entity.Employee;
+import org.ibs.example.service.GreetingServiceImpl2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -24,7 +25,7 @@ public class GreetingServiceConfig {
     @Bean
     @Profile("test")
     GreetingService getGrSerImpl2() {
-        return new GreetingServiceImpl(log);
+        return new GreetingServiceImpl2(log);
     }
 
     @Bean
