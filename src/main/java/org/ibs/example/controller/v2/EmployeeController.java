@@ -19,20 +19,17 @@ public class EmployeeController {
     @Autowired
     private BigSalaryService bigsalaryService;
 
-    ////Практическое задание
-    //получить список непосредственных подчиненных сотрудника
     @GetMapping("/{id}/subordinates")
     Iterable<Employee> getSubordinates(@PathVariable Integer id) {
         return employeeRepository.findAllByBossId(id);
     }
 
-    //получить непосредственного руководителя сотрудника
     @GetMapping("/{id}/supervisor")
     Employee getBoss(@PathVariable Integer id) {
-        return employeeRepository.findById(id).get().getBoss();
+
+        return employeeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Boss не найден"));
     }
 
-    //список сотрудников получающих больший месячный оклад, чем их руководители (зарплатный сервис)
     @GetMapping("/bigsalary")
     Iterable<Employee> getSubordinatesMaxSalary() {
         return bigsalaryService.getBigSalary();
